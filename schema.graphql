@@ -1,0 +1,55 @@
+type AccountAdded @entity(immutable: true) {
+  id: Bytes!
+  account: Bytes! # address
+  ownerAccount: Bytes! # address
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type AccountDeleted @entity(immutable: true) {
+  id: Bytes!
+  owner: Bytes! # address
+  account: Bytes! # address
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type ManagerCreated @entity(immutable: true) {
+  id: Bytes!
+  owner: Bytes! # address
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type ManagerDeleted @entity(immutable: true) {
+  id: Bytes!
+  owner: Bytes! # address
+  accounts: [Bytes]! # address[]
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type TransferSuccess @entity(immutable: true) {
+  id: Bytes!
+  accountFrom: Bytes! # address
+  accountTo: Bytes! # address
+  owner: Bytes! # address
+  amount: BigInt! # uint256
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type Withdrawn @entity(immutable: true) {
+  id: Bytes!
+  account: Bytes! # address
+  owner: Bytes! # address
+  amount: BigInt! # uint256
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}

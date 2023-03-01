@@ -1,0 +1,38 @@
+specVersion: 0.0.5
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum
+    name: Manager
+    network: goerli
+    source:
+      address: "0xD0E46a495b08905A5f62255aDA9A4a9d906a3F20"
+      abi: Manager
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - AccountAdded
+        - AccountDeleted
+        - ManagerCreated
+        - ManagerDeleted
+        - TransferSuccess
+        - Withdrawn
+      abis:
+        - name: Manager
+          file: ./abis/Manager.json
+      eventHandlers:
+        - event: AccountAdded(address,address)
+          handler: handleAccountAdded
+        - event: AccountDeleted(address,address)
+          handler: handleAccountDeleted
+        - event: ManagerCreated(address)
+          handler: handleManagerCreated
+        - event: ManagerDeleted(address,address[])
+          handler: handleManagerDeleted
+        - event: TransferSuccess(address,address,address,uint256)
+          handler: handleTransferSuccess
+        - event: Withdrawn(address,address,uint256)
+          handler: handleWithdrawn
+      file: ./src/manager.ts
